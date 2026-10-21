@@ -1,0 +1,26 @@
+# Python 3.11.9 (зафиксировано в .python-version)
+
+# Core
+numpy==1.26.4
+scipy==1.11.4
+pandas==2.2.2
+
+# ML / DL
+torch==2.3.1
+scikit-learn==1.4.2
+
+# Визуализация
+matplotlib==3.8.4
+seaborn==0.13.2
+
+# Ноутбуки
+jupyter==1.0.0
+jupyterlab==4.2.0
+ipykernel==6.29.4
+
+# Утилиты
+tqdm==4.66.4
+PyYAML==6.0.1
+
+# Тестирование
+pytest==8.2.0

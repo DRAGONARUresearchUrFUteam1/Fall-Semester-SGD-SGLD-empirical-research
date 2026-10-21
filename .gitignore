@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.eggs/
+
+# Виртуальные окружения
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Данные и результаты (не коммитим)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+results/figures/*
+results/checkpoints/*
+!results/figures/.gitkeep
+!results/checkpoints/.gitkeep
+
+# Артефакты экспериментов
+*.pt
+*.pth
+*.ckpt
+*.log
+wandb/
+.private/*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Тесты и кэши
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
