@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "experiment_id": "8928f7ce-abe1-4ff3-abf2-80869aa5d29d",
+  "created_at": "2026-11-04T20:08:12.663829+00:00",
+  "config": {
+    "method": "SGLD",
+    "seed": 42,
+    "learning_rate": 0.01,
+    "batch_size": 32,
+    "temperature": 0.001,
+    "data_kind": "synthetic_logging_demo",
+    "description": "Hand-written values for format demonstration; not research results.",
+    "escape_rule": "Synthetic status transition for API demonstration only"
+  }
+}

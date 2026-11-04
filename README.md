@@ -77,6 +77,19 @@ pytest tests/
 jupyter lab
 ```
 
+## Логирование экспериментов
+
+Модуль `src/experiment_logging.py` сохраняет конфигурацию и метрики итераций
+в JSON/JSONL в `results/runs/<UUID>/`. Загрузчик объединяет запуски в pandas:
+
+```bash
+python -m src.logging_example  # синтетический пример, не результаты исследования
+python -m src.results results/runs --output results/aggregated.csv
+```
+
+API, схема полей и правила измерений описаны в [docs/experiment_logging.md](docs/experiment_logging.md).
+Сохранённый синтетический пример: [docs/examples/logging/](docs/examples/logging/).
+
 ## Основные библиотеки
 
 | Библиотека      | Версия  | Назначение                          |
