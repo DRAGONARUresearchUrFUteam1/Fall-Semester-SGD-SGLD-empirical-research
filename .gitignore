@@ -21,6 +21,8 @@ data/processed/*
 !data/processed/.gitkeep
 results/figures/*
 results/checkpoints/*
+results/runs/
+results/*.csv
 !results/figures/.gitkeep
 !results/checkpoints/.gitkeep
 
@@ -47,3 +49,6 @@ Thumbs.db
 .ruff_cache/
 .coverage
 htmlcov/
+
+# other
+.private/
