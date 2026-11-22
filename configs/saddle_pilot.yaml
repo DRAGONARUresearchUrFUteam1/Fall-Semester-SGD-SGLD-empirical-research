@@ -1,0 +1,15 @@
+# Example only: not a protocol to test H1–H5.
+common:
+  data_kind: synthetic_finite_sum_pilot
+  c: 0
+  x0: [0.05, 0]
+  slope: [0.12, 0.05]
+  learning_rate: 0.01
+  batch_size: 1
+  step_limit: 100
+  delta: null
+methods:
+  - method: SGD
+  - method: SGLD
+    temperature: 0.02
+seeds: [11, 23]
