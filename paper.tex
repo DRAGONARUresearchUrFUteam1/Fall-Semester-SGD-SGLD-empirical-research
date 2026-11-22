@@ -1,0 +1,127 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{natbib}
+\usepackage[hidelinks]{hyperref}
+
+\title{Noise Geometry and Escape Dynamics in SGD and SGLD on Nonsmooth
+Nonconvex Landscapes: A Controlled Empirical Study}
+\author{Research draft for internal review}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+The same perturbation that helps an optimizer move away from a saddle may
+hinder its subsequent progress. A large update can cross the boundary of a
+saddle neighborhood without moving in a direction of descent or improving
+the objective. Conversely, leaving that neighborhood with a lower training
+loss need not improve performance on unseen data. These distinctions matter
+when comparing stochastic gradient descent (SGD), whose randomness comes from
+sampling training components, with stochastic gradient Langevin dynamics
+(SGLD), which adds an explicit, typically isotropic, Gaussian perturbation
+\citep{raginsky2017,zhu2019}.
+
+Nonsmoothness complicates the measurement. The ordinary Hessian may be
+undefined at a kink, and a subgradient sampled off the kink need not be small
+even arbitrarily close to a critical point. Active-manifold analyses
+distinguish the tangential geometry of a nonsmooth saddle from the behavior
+across the kink \citep{bianchi2023}. This distinction motivates our
+synthetic benchmarks. For models whose active geometry is not established, we
+plan to use explicitly labeled diagnostic proxies rather than treat their
+outputs as certificates of a strict saddle.
+
+We ask when the \emph{structure, intensity, and timing} of stochastic
+perturbations improve productive escape, subsequent optimization, and
+out-of-sample quality at equal component-oracle cost. We plan three elements:
+first, define and record geometric exit, movement along an unstable
+direction, and exit with a prespecified objective decrease as distinct
+events; second, compare intrinsic mini-batch noise and isotropic perturbations
+under controls for total noise scale and the cost of its calibration; third,
+test whether early versus sustained noise, ambient dimension, and changes in
+batch size alter the relationship between escape and final quality. Analytical
+landscapes are intended to isolate mechanisms, while statistical tasks are
+needed to evaluate out-of-sample quality. This is a proposed empirical design,
+not a claim of universal superiority or a report of experimental findings.
+
+\section{Related work}
+
+\paragraph{Escaping saddles in smooth and nonsmooth optimization.}
+For smooth objectives, perturbed gradient descent can find approximate
+second-order stationary points under Lipschitz-gradient and
+Lipschitz-Hessian assumptions \citep{jin2017}. \citet{daneshmand2018} study
+the second moment of stochastic gradients along a negative-curvature
+direction, while \citet{fang2019} use a dispersiveness condition on the
+gradient noise. These conditions motivate directional measurements, but do
+not identify the probability of our finite-budget, loss-qualified exit
+event. In nonsmooth optimization, \citet{bianchi2023} establish
+nonconvergence to active strict saddles under assumptions on the geometry,
+steps, and perturbations. \citet{davis2021} instead study finite-time escape
+from strict saddles of the Moreau envelope using inexact proximal oracles.
+Our geometric classification of iterates and finite-budget events do
+not require interpreting an arbitrary ReLU iterate as a mathematically
+certified active saddle.
+
+\paragraph{Langevin methods, noise controls, and generalization.}
+\citet{zhang2017} bound SGLD hitting times to selected sets; this differs
+from observing a crossing of a local saddle neighborhood with a stipulated
+decrease in loss. \citet{zhu2019} compare covariances with matched trace in
+the context of escape from sharp minima, motivating a scale-matched control
+without transferring their minimum-escape statistic to saddles.
+\citet{mou2017} analyze generalization via stability and PAC-Bayesian
+arguments, and \citet{zhang2020} alternate exploration and sampling in
+cyclic stochastic-gradient MCMC. Proximal Langevin schemes provide another
+way to handle nonsmooth potentials when the goal is sampling
+\citep{durmus2016,renaud2025}. Our proposed comparison is an optimization
+study: it evaluates exit and held-out quality separately, conditions
+comparisons on declared oracle cost, and treats the allocation of a
+matched amount of perturbation energy over time as a separate question.
+
+\begin{thebibliography}{12}
+\bibitem[Jin et al.(2017)]{jin2017}
+C.~Jin et al. How to Escape Saddle Points Efficiently. 2017.
+\url{https://www.alphaxiv.org/abs/1703.00887}
+\bibitem[Daneshmand et al.(2018)]{daneshmand2018}
+H.~Daneshmand et al. Escaping Saddles with Stochastic Gradients. 2018.
+\url{https://www.alphaxiv.org/abs/1803.05999}
+\bibitem[Fang et al.(2019)]{fang2019}
+C.~Fang et al. Sharp Analysis for Nonconvex SGD Escaping from Saddle Points.
+2019. \url{https://www.alphaxiv.org/abs/1902.00247}
+\bibitem[Bianchi et al.(2023)]{bianchi2023}
+P.~Bianchi, W.~Hachem, and S.~Schechtman. Stochastic Subgradient Descent
+Escapes Active Strict Saddles on Weakly Convex Functions. 2023 preprint.
+\url{https://www.alphaxiv.org/abs/2108.02072}
+\bibitem[Davis et al.(2021)]{davis2021}
+D.~Davis, M.~D\'iaz, and D.~Drusvyatskiy. Escaping Strict Saddle Points of
+the Moreau Envelope in Nonsmooth Optimization. 2021 preprint.
+\url{https://www.alphaxiv.org/abs/2106.09815}
+\bibitem[Zhang et al.(2017)]{zhang2017}
+Y.~Zhang, P.~Liang, and M.~Charikar. A Hitting Time Analysis of Stochastic
+Gradient Langevin Dynamics. 2017. \url{https://www.alphaxiv.org/abs/1702.05575}
+\bibitem[Raginsky et al.(2017)]{raginsky2017}
+M.~Raginsky, A.~Rakhlin, and M.~Telgarsky. Non-Convex Learning via
+Stochastic Gradient Langevin Dynamics: A Nonasymptotic Analysis. 2017.
+\url{https://www.alphaxiv.org/abs/1702.03849}
+\bibitem[Mou et al.(2017)]{mou2017}
+W.~Mou et al. Generalization Bounds of SGLD for Non-convex Learning:
+Two Theoretical Viewpoints. 2017 preprint.
+\url{https://www.alphaxiv.org/abs/1707.05947}
+\bibitem[Zhu et al.(2019)]{zhu2019}
+Z.~Zhu et al. The Anisotropic Noise in Stochastic Gradient Descent:
+Its Behavior of Escaping from Sharp Minima and Regularization Effects. 2019.
+\url{https://www.alphaxiv.org/abs/1803.00195}
+\bibitem[Zhang et al.(2020)]{zhang2020}
+R.~Zhang et al. Cyclical Stochastic Gradient MCMC for Bayesian Deep
+Learning. 2020. \url{https://www.alphaxiv.org/abs/1902.03932}
+\bibitem[Durmus et al.(2016)]{durmus2016}
+A.~Durmus et al. Efficient Bayesian Computation by Proximal Markov Chain
+Monte Carlo: When Langevin Meets Moreau. 2016 preprint.
+\url{https://www.alphaxiv.org/abs/1612.07471}
+\bibitem[Renaud et al.(2025)]{renaud2025}
+M.~Renaud et al. From Stability of Langevin Diffusion to Convergence of
+Proximal MCMC for Non-log-concave Sampling. 2025 preprint.
+\url{https://www.alphaxiv.org/abs/2505.14177}
+\end{thebibliography}
+\end{document}
